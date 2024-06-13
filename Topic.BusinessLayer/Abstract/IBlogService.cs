@@ -9,5 +9,6 @@ namespace Topic.BusinessLayer.Abstract
 {
     public interface IBlogService:IGenericService<Blog>
     {
+        List<Blog> TGetBlogsWithCategories();
     }
 }

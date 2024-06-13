@@ -11,8 +11,15 @@ namespace Topic.BusinessLayer.Concrate
 {
     public class BlogManager : GenericManager<Blog>,IBlogService
     {
-        public BlogManager(IGenericDal<Blog> genericDal) : base(genericDal)
+        private readonly IBlogDal _blogDal;
+        public BlogManager(IGenericDal<Blog> genericDal, IBlogDal blogDal) : base(genericDal)
         {
+            _blogDal = blogDal;
+        }
+
+        public List<Blog> TGetBlogsWithCategories()
+        {
+            return _blogDal.GetBlogsWithCategories();
         }
     }
 }

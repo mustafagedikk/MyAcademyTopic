@@ -1,8 +1,23 @@
+using System.Reflection;
+using Topic.BusinessLayer.Abstract;
+using Topic.BusinessLayer.Concrate;
+using Topic.DataAccessLayer.Abstract;
+using Topic.DataAccessLayer.Concrate;
 using Topic.DataAccessLayer.Context;
+using Topic.DataAccessLayer.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<IBlogDal,EfBlogDal>();
+builder.Services.AddScoped<IBlogService,BlogManager>();
+builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
+
+builder.Services.AddScoped<IManuelDal, EfManuelDal>();
+builder.Services.AddScoped<IManuelService, ManuelManager>();
+builder.Services.AddScoped(typeof(IGenericDal<>), typeof(GenericRepository<>));
 
 
 builder.Services.AddDbContext<TopicContext>();
